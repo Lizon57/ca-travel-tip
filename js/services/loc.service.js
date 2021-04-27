@@ -38,7 +38,6 @@ function removeLocById(locId) {
             locs.splice(idx, 1);
             controller.renderLocs(locs)
             storageService.saveToStorage(locs)
-            console.log(locs)
         }
     })
 }
