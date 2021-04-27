@@ -1,5 +1,6 @@
 export const locService = {
-    getLocs
+    getLocs,
+    locs
 }
 var locs = [
     { name: 'Loc1', lat: 32.047104, lng: 34.832384 }, 
