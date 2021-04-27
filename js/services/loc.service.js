@@ -1,9 +1,12 @@
+import { controller } from '../app.controller.js'
+import { storageService } from './storage.service.js'
 export const locService = {
     getLocs,
     addLoc,
     removeLocById,
     updateLocs
 }
+
 
 var gLocId = 12345
 
@@ -29,7 +32,12 @@ function addLoc(loc) {
 
 function removeLocById(locId) {
     locs.filter((loc, idx) => {
-    if (loc.id === locId) console.log(idx)
+        if (loc.id === locId) {
+            locs.splice(idx, 1);
+            controller.renderLocs(locs)
+            storageService.saveToStorage(locs)
+            console.log(locs)
+        }
     })
 }
 
