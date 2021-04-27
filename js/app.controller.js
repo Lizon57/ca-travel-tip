@@ -9,7 +9,7 @@ export const controller = {
 
 window.onload = onInit;
 window.onDelete = onDelete;
-window.panTo = panTo;
+window.onGoLocation = onGoLocation;
 
 function onInit() {
     addEventListenrs();
@@ -43,7 +43,7 @@ function renderLocs(locs) {
             </div>
 
             <div class="loc-actions">
-                <button class="loc-goto" onClick="panTo(${loc.lat},${loc.lng})">GO!</button>
+                <button class="loc-goto" onClick="onGoLocation(${loc.lat}, ${loc.lng})">GO!</button>
                 <button class="loc-delete" onClick="onDelete(${loc.id})">X</button>
             </div>
         </div>`
@@ -88,4 +88,8 @@ function getPosition() {
 
 function onDelete(locId) {
     locService.removeLocById(locId)
+}
+
+function onGoLocation(lat, lng){
+    mapService.panTo(lat, lng)
 }
