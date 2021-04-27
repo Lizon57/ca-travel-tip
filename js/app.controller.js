@@ -1,6 +1,7 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-import { storageService } from './services/storage.service.js'
+// import { storageService } from './services/storage.service.js'
+
 
 window.onload = onInit;
 
@@ -38,6 +39,13 @@ function addEventListenrs() {
                 console.log('err!!!', err);
             })
     })
+}
+
+
+function renderLocs(locs) {
+    console.log(locs)
+
+
 }
 
 
