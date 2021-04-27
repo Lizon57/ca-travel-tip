@@ -1,5 +1,7 @@
 import { locService } from './loc.service.js'
 import { storageService } from './storage.service.js'
+import { controller } from '../app.controller.js'
+
 
 export const mapService = {
     initMap,
@@ -42,6 +44,8 @@ function addMarker(loc) {
     // Save gLocs to local storage
     locService.getLocs()
         .then(locs => storageService.saveToStorage(locs))
+
+    controller.renderLocs()
 
     return marker;
 }
