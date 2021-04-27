@@ -15,10 +15,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             gMap.addListener("click", (mapsMouseEvent) => {
-                // get clicked position 
-                const currPos = mapsMouseEvent.latLng.toJSON();
-                // pass clicked position to add marker
-                addMarker(currPos);
+                // get clicked position and pass it to addMarker() 
+                const clickedPos = mapsMouseEvent.latLng.toJSON();
+                addMarker(clickedPos);
             })
         })
 }
