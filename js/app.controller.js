@@ -124,7 +124,7 @@ function onGoLocation(lat, lng) {
 }
 
 function onCopyLink(lat, lng) {
-    const address = `http://gitHub.Zibi?lat${lat}&${lng}`;
+    const address = `https://lizon57.github.io/ca-travel-tip/index.html?lat=${lat}lng=&${lng}`;
     navigator.clipboard.writeText(address)
         .then(function () {
             alert(`link copied to clipboard`)
