@@ -9,6 +9,7 @@ export const controller = {
 
 window.onload = onInit;
 window.onDelete = onDelete;
+window.panTo = panTo;
 
 function onInit() {
     addEventListenrs();
@@ -29,7 +30,7 @@ function onInit() {
 function renderLocs(locs) {
     const elLocationsTable = document.querySelector('.locations-table')
 
-    if (locs.length === 0) elLocationsTable.innerHTML='EIN PO KLUM!!'
+    if (locs.length === 0) elLocationsTable.innerHTML = 'EIN PO KLUM!!'
 
     let strsHTML = '';
 
@@ -42,7 +43,7 @@ function renderLocs(locs) {
             </div>
 
             <div class="loc-actions">
-                <button class="loc-goto">GO!</button>
+                <button class="loc-goto" onClick="panTo(${loc.lat},${loc.lng})">GO!</button>
                 <button class="loc-delete" onClick="onDelete(${loc.id})">X</button>
             </div>
         </div>`

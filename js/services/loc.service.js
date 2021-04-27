@@ -4,7 +4,8 @@ export const locService = {
     getLocs,
     addLoc,
     removeLocById,
-    updateLocs
+    updateLocs,
+    onGoLoc
 }
 
 
@@ -45,4 +46,9 @@ function removeLocById(locId) {
 
 function updateLocs(locsFromStroage) {
     locs = locsFromStroage
+}
+
+function onGoLoc(lat, lng) {
+    console.log(lat, lng)
+
 }
