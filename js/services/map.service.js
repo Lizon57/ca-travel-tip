@@ -2,7 +2,6 @@ import { locService } from './loc.service.js'
 import { storageService } from './storage.service.js'
 import { controller } from '../app.controller.js'
 
-
 export const mapService = {
     initMap,
     addMarker,
@@ -36,6 +35,8 @@ function addMarker(loc) {
         position: loc,
         map: gMap,
         title: 'Hello World!'
+
+
     });
 
     // Add location to gLocs
@@ -45,7 +46,9 @@ function addMarker(loc) {
     locService.getLocs()
         .then(locs => storageService.saveToStorage(locs))
 
-    controller.renderLocs()
+    // Render locs
+    locService.getLocs()
+        .then(locs => {controller.renderLocs(locs)})
 
     return marker;
 }

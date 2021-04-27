@@ -1,21 +1,13 @@
 export const locService = {
     getLocs,
-    addLoc
+    addLoc,
+    removeLocById,
+    updateLocs
 }
 
 var gLocId = 12345
 
-var locs = [{
-    id: 12245,
-    name: 'Loc1',
-    lat: 32.047104,
-    lng: 34.832384,
-    weather: 'sunny',
-    createdAt: 161952728985,
-    updatedAt: 161952728987
-}]
-
-
+var locs = []
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -33,4 +25,14 @@ function addLoc(loc) {
         createdAt: Date.now(),
         updatedAt: ''
     })
+}
+
+function removeLocById(locId) {
+    locs.filter((loc, idx) => {
+    if (loc.id === locId) console.log(idx)
+    })
+}
+
+function updateLocs(locsFromStroage) {
+    locs = locsFromStroage
 }

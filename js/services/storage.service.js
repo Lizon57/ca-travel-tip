@@ -5,6 +5,5 @@ function saveToStorage(locs) {
 }
 
 function getFromStorage() {
-    JSON.parse(localStorage.getItem('saved-locs'))
-
+    return JSON.parse(localStorage.getItem('saved-locs'))
 }

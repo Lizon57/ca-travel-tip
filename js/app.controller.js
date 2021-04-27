@@ -1,15 +1,14 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { storageService } from './services/storage.service.js'
 
 export const controller = {
     renderLocs
 }
 
-function renderLocs(){
-    console.log(`hi`)
-}
 
 window.onload = onInit;
+window.onDelete = onDelete;
 
 function onInit() {
     addEventListenrs();
@@ -18,6 +17,35 @@ function onInit() {
             console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
+
+    // Render saved locs
+    const locsToRender = storageService.getFromStorage()
+    if (locsToRender) {
+        locService.updateLocs(locsToRender)
+        renderLocs(locsToRender)
+    }
+}
+
+function renderLocs(locs) {
+    const elLocationsTable = document.querySelector('.locations-table')
+    let strsHTML = '';
+
+    locs.map(loc => {
+        strsHTML += `
+        <div class="loc-container">
+            <div class="loc-info">
+                <span class="loc-name">${loc.name}</span>
+                <span class="loc-weather">${loc.weather}</span>
+            </div>
+
+            <div class="loc-actions">
+                <button class="loc-goto">GO!</button>
+                <button class="loc-delete" onClick="onDelete(${loc.id})">X</button>
+            </div>
+        </div>`
+
+        elLocationsTable.innerHTML = strsHTML
+    })
 }
 
 function addEventListenrs() {
@@ -47,10 +75,13 @@ function addEventListenrs() {
     })
 }
 
-
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
+}
+
+function onDelete(locId) {
+    locService.removeLocById(locId)
 }
