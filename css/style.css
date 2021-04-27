@@ -11,19 +11,50 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+header h1{
+    margin: 0;
     padding: 1rem;
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: sans-serif;
+}
+
+header div{
+    margin-inline-end: 1rem;
+}
+
+header input{
+    background-color: #ded7d5;
+    border: 1px solid #49515d;
+    font-size: 1.2rem;
+    padding: 5px;
+
 }
 
 button {
-    font-size: 20px;
+    background-color: #7f7f7f;
+    border: 1px solid #6e3f4a;
+    color: white;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+button:first-child{
+    margin-inline-start: 0;
 }
 
 .loc-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    font-size: 30px;
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+.loc-title{
+    font-weight: 700;
 }
 
 .main-contant-container {
@@ -31,27 +62,39 @@ button {
     justify-content: space-between;
 }
 
-.wheather-loc-container {
+.weather-container,
+.locations-table{
+    height: 300px;
+    width: 300px;
+    margin-inline: 1rem;
+}
+
+.weather-container{
+    background-color: #fff;
+    border: 1px solid #454f6f;
+    margin-bottom: 1rem;
+}
+
+.locations-table{
+    background-color: #4f81bd;
+    border: 5px solid #385d8a;
+    overflow-y: scroll;
+}
+
+.locations-table-item-container{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: .5rem;
+}
+
+.locations-table-item-container:nth-child(odd){
+    background-color: #a4bfe0;
 }
 
 .main-map {
     width: 100%;
-    height: 600px;
-    margin: 20px;
-}
-
-.A {
-    background-color: white;
-    width: 300px;
-    height: 300px;
-    margin: 5px;
-}
-
-.locations-table {
-    background-color: blue;
-    height: 300px;
-    width: 300px;
-    margin: 5px;
+    height: calc(600px + 1rem);
+    margin-inline-end: 1rem;
 }

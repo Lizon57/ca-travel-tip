@@ -3,7 +3,8 @@ import { mapService } from './services/map.service.js'
 import { storageService } from './services/storage.service.js'
 
 export const controller = {
-    renderLocs
+    renderLocs,
+    renderLocName
 }
 
 let currLat
@@ -55,15 +56,12 @@ function renderLocs(locs) {
 
     locs.map(loc => {
         strsHTML += `
-        <div class="loc-container">
-            <div class="loc-info">
-                <span class="loc-name">${loc.name}</span>
-                <span class="loc-weather">${loc.weather}</span>
-            </div>
+        <div class="locations-table-item-container">
+            <span class="loc-name">${loc.name}</span>
 
             <div class="loc-actions">
-                <button class="loc-goto" onClick="onGoLocation(${loc.lat}, ${loc.lng})">GO!</button>
-                <button class="loc-delete" onClick="onDelete(${loc.id})">X</button>
+                <button onClick="onGoLocation(${loc.lat}, ${loc.lng})">GO!</button>
+                <button onClick="onDelete(${loc.id})">X</button>
             </div>
         </div>`
 
@@ -72,22 +70,27 @@ function renderLocs(locs) {
 }
 
 function addEventListenrs() {
-    document.querySelector('.btn-pan').addEventListener('click', (ev) => {
-        mapService.panTo(35.6895, 139.6917);
+    document.querySelector('.btn-search').addEventListener('click', () => {
+        const searchVal = document.querySelector('.search-input').value
+        locService.getLocIdByStr(searchVal)
     })
 
-    document.querySelector('.btn-add-marker').addEventListener('click', (ev) => {
-        mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-    })
+    // document.querySelector('.btn-pan').addEventListener('click', () => {
+    //     mapService.panTo(35.6895, 139.6917);
+    // })
 
-    document.querySelector('.btn-get-locs').addEventListener('click', (ev) => {
-        locService.getLocs()
-            .then(locs => {
-                document.querySelector('.locs').innerText = JSON.stringify(locs)
-            })
-    })
+    // document.querySelector('.btn-add-marker').addEventListener('click', () => {
+    //     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    // })
 
-    document.querySelector('.btn-user-pos').addEventListener('click', (ev) => {
+    // document.querySelector('.btn-get-locs').addEventListener('click', () => {
+    //     locService.getLocs()
+    //         .then(locs => {
+    //             document.querySelector('.locs').innerText = JSON.stringify(locs)
+    //         })
+    // })
+
+    document.querySelector('.btn-user-pos').addEventListener('click', () => {
         getPosition()
             .then(pos => {
                 mapService.panTo(pos.coords.latitude, pos.coords.longitude)
@@ -98,7 +101,7 @@ function addEventListenrs() {
             })
     })
 
-    document.querySelector('.copy-location-to-keyboard').addEventListener('click', (ev) => {
+    document.querySelector('.copy-location-to-keyboard').addEventListener('click', () => {
         if (currLat && currLng) onCopyLink(currLat, currLng)
     })
 }
@@ -123,9 +126,14 @@ function onGoLocation(lat, lng) {
 function onCopyLink(lat, lng) {
     const address = `http://gitHub.Zibi?lat${lat}&${lng}`;
     navigator.clipboard.writeText(address)
-    .then(function () {
-        alert (`link copied to clipboard`)
-    }, function (err) {
-        console.error('Async: Could not copy text: ', err)
-    })
+        .then(function () {
+            alert(`link copied to clipboard`)
+        }, function (err) {
+            console.error('Async: Could not copy text: ', err)
+        })
+}
+
+function renderLocName(locName) {
+    const elLocName = document.querySelector('.loc-name')
+    elLocName.innerText = locName
 }

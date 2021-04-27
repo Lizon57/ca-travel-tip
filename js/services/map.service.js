@@ -1,6 +1,5 @@
 import { locService } from './loc.service.js'
 import { storageService } from './storage.service.js'
-import { controller } from '../app.controller.js'
 
 export const mapService = {
     initMap,
@@ -11,7 +10,7 @@ export const mapService = {
 var gMap;
 
 
-function initMap(lat = 32.0749831, lng = 34.9120554) {
+function initMap(lat = 31.925358176608505, lng = 34.69877243041992) {
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
@@ -58,7 +57,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyBfMQfVb9oKKZKCrkg0toAIbJ26HovmvBA'; //Complete
+    const API_KEY = 'AIzaSyBfMQfVb9oKKZKCrkg0toAIbJ26HovmvBA';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;

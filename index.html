@@ -10,48 +10,40 @@
 </head>
 
 <body>
-    <div class="main-container">
-        <header>
-            <h1>TravelTip Starter</h1>
-            <div>
-                <input type="text" placeholder="Enter Location">
-                <button>Go</button>
-                <button class="btn-user-pos">My Location</button>
-            </div>
 
-        </header>
+    <header>
+        <h1>TravelTip</h1>
+        <div>
+            <input class="search-input" type="text" placeholder="Enter Location"><!--
+            --><button class="btn-search">Go</button>
+            <button class="btn-user-pos">My Location</button>
+        </div>
+    </header>
 
-        <section class="loc-container">
-            <div>
-                <span class="loc-title">Location:</span>
-                <span class="loc-name">New York</span>
-            </div>
-            <div>
-                <button class="copy-location-to-keyboard">Copy Location</button>
-            </div>
+    <section class="loc-container">
+        <div>
+            <span class="loc-title">Location:</span>
+            <span class="loc-name"></span>
+        </div>
+        <div>
+            <button class="copy-location-to-keyboard">Copy Location</button>
+        </div>
+    </section>
 
-        </section>
-
-        <section class="main-contant-container">
-
-            <div class="wheather-loc-container">
-                <div class="A">A</div>
-                <div class="locations-table">B</div>
-            </div>
-            <div class="main-map" id="map"></div>
-
-        </section>
+    <section class="main-contant-container">
+        <div class="whather-loc-container">
+            <div class="weather-container">Weather today soon to come</div>
+            <div class="locations-table">B</div>
+        </div>
+        <div class="main-map" id="map"></div>
+    </section>
 
 
-
-
-    </div>
-
-
-    <button class="btn-add-marker">Add Marker Speific Location</button>
+    <!-- <button class="btn-add-marker">Add Marker Speific Location</button>
     <button class="btn-get-locs">Get Locations</button>
-    <button class="btn-pan">Pan Map to Tokyo</button>
+    <button class="btn-pan">Pan Map to Tokyo</button> -->
 
+    <script src="lib/axios.js"></script>
 
     <script type="module" src="js/app.controller.js"></script>
 </body>
