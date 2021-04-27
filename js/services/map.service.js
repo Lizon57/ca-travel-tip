@@ -6,6 +6,7 @@ export const mapService = {
 
 var gMap;
 
+
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
     return _connectGoogleApi()
@@ -18,7 +19,10 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 })
             console.log('Map!', gMap);
         })
+
 }
+
+
 
 function addMarker(loc) {
     var marker = new google.maps.Marker({
