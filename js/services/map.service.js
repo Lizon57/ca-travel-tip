@@ -1,4 +1,5 @@
 import { locService } from './loc.service.js'
+import { storageService } from './storage.service.js'
 
 export const mapService = {
     initMap,
@@ -8,9 +9,12 @@ export const mapService = {
 
 var gMap;
 
+
 function initMap(lat = 32.0749831, lng = 34.9120554) {
+    console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
+            console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
@@ -22,6 +26,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 addMarker(clickedPos);
             })
         })
+
 }
 
 function addMarker(loc) {
@@ -30,8 +35,18 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     });
+
+    // Add location to gLocs
+    locService.addLoc(loc);
+
+    // Save gLocs to local storage
+    locService.getLocs()
+        .then(locs => storageService.saveToStorage(locs))
+
     return marker;
 }
+
+
 
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);

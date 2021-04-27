@@ -1,18 +1,36 @@
 export const locService = {
     getLocs,
-    locs
+    addLoc
 }
-var locs = [
-    { name: 'Loc1', lat: 32.047104, lng: 34.832384 }, 
-    { name: 'Loc2', lat: 32.047201, lng: 34.832581 }
-]
+
+var gLocId = 12345
+
+var locs = [{
+    id: 12245,
+    name: 'Loc1',
+    lat: 32.047104,
+    lng: 34.832384,
+    weather: 'sunny',
+    createdAt: 161952728985,
+    updatedAt: 161952728987
+}]
+
+
 
 function getLocs() {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs);
-        }, 2000)
+        resolve(locs);
     });
 }
 
-
+function addLoc(loc) {
+    locs.push({
+        id: gLocId++,
+        name: 'Loc1',
+        lat: loc.lat,
+        lng: loc.lng,
+        weather: 'sunny',
+        createdAt: Date.now(),
+        updatedAt: ''
+    })
+}
