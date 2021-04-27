@@ -1,5 +1,3 @@
-
-
 export const mapService = {
     initMap,
     addMarker,
@@ -9,16 +7,19 @@ export const mapService = {
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
-            console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
-            console.log('Map!', gMap);
+            gMap.addListener("click", (mapsMouseEvent) => {
+                // get clicked position 
+                const currPos = mapsMouseEvent.latLng.toJSON();
+                // pass clicked position to add marker
+                addMarker(currPos);
+            })
         })
 }
 
@@ -40,7 +41,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyCE1_WVPkA6w51_K5aGvvNmCUb-agGUJi4';
+    const API_KEY = 'AIzaSyBfMQfVb9oKKZKCrkg0toAIbJ26HovmvBA'; //Complete
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
