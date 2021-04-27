@@ -18,9 +18,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 10
+            })
             gMap.addListener("click", (mapsMouseEvent) => {
                 // get clicked position and pass it to addMarker() 
                 const clickedPos = mapsMouseEvent.latLng.toJSON();

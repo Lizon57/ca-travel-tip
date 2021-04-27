@@ -6,6 +6,9 @@ export const controller = {
     renderLocs
 }
 
+let currLat
+let currLng
+
 
 window.onload = onInit;
 window.onDelete = onDelete;
@@ -13,11 +16,26 @@ window.onGoLocation = onGoLocation;
 
 function onInit() {
     addEventListenrs();
-    mapService.initMap()
-        .then(() => {
-            console.log('Map is ready');
-        })
-        .catch(() => console.log('Error: cannot init map'));
+
+    // Pan to addressed location
+    const urlParams = new URLSearchParams(window.location.search)
+    const latParam = +urlParams.get('lat')
+    const lngParam = +urlParams.get('lng')
+
+    if (latParam >= -85 && latParam <= +85 && lngParam >= -180 && lngParam <= 180) {
+        mapService.initMap(latParam, lngParam)
+            .then(() => {
+                console.log('Map is ready');
+            })
+            .catch(() => console.log('Error: cannot init map'));
+    } else {
+        console.log(`hi`)
+        mapService.initMap()
+            .then(() => {
+                console.log('Map is ready');
+            })
+            .catch(() => console.log('Error: cannot init map'));
+    }
 
     // Render saved locs
     const locsToRender = storageService.getFromStorage()
@@ -25,6 +43,7 @@ function onInit() {
         locService.updateLocs(locsToRender)
         renderLocs(locsToRender)
     }
+
 }
 
 function renderLocs(locs) {
@@ -56,16 +75,18 @@ function addEventListenrs() {
     document.querySelector('.btn-pan').addEventListener('click', (ev) => {
         mapService.panTo(35.6895, 139.6917);
     })
+
     document.querySelector('.btn-add-marker').addEventListener('click', (ev) => {
         mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
     })
+
     document.querySelector('.btn-get-locs').addEventListener('click', (ev) => {
         locService.getLocs()
             .then(locs => {
                 document.querySelector('.locs').innerText = JSON.stringify(locs)
             })
-
     })
+
     document.querySelector('.btn-user-pos').addEventListener('click', (ev) => {
         getPosition()
             .then(pos => {
@@ -75,6 +96,10 @@ function addEventListenrs() {
             .catch(err => {
                 console.log('err!!!', err);
             })
+    })
+
+    document.querySelector('.copy-location-to-keyboard').addEventListener('click', (ev) => {
+        if (currLat && currLng) onCopyLink(currLat, currLng)
     })
 }
 
@@ -91,4 +116,16 @@ function onDelete(locId) {
 
 function onGoLocation(lat, lng) {
     mapService.panTo(lat, lng)
+    currLat = lat
+    currLng = lng
+}
+
+function onCopyLink(lat, lng) {
+    const address = `http://gitHub.Zibi?lat${lat}&${lng}`;
+    navigator.clipboard.writeText(address)
+    .then(function () {
+        alert (`link copied to clipboard`)
+    }, function (err) {
+        console.error('Async: Could not copy text: ', err)
+    })
 }
