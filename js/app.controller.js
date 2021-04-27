@@ -69,9 +69,8 @@ function addEventListenrs() {
     document.querySelector('.btn-user-pos').addEventListener('click', (ev) => {
         getPosition()
             .then(pos => {
+                mapService.panTo(pos.coords.latitude, pos.coords.longitude)
                 console.log('User position is:', pos.coords);
-                document.querySelector('.user-pos').innerText =
-                    `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
             })
             .catch(err => {
                 console.log('err!!!', err);
@@ -90,6 +89,6 @@ function onDelete(locId) {
     locService.removeLocById(locId)
 }
 
-function onGoLocation(lat, lng){
+function onGoLocation(lat, lng) {
     mapService.panTo(lat, lng)
 }
