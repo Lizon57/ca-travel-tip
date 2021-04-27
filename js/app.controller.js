@@ -94,7 +94,6 @@ function addEventListenrs() {
         getPosition()
             .then(pos => {
                 mapService.panTo(pos.coords.latitude, pos.coords.longitude)
-                console.log('User position is:', pos.coords);
             })
             .catch(err => {
                 console.log('err!!!', err);
@@ -124,7 +123,7 @@ function onGoLocation(lat, lng) {
 }
 
 function onCopyLink(lat, lng) {
-    const address = `https://lizon57.github.io/ca-travel-tip/index.html?lat=${lat}lng=&${lng}`;
+    const address = `https://lizon57.github.io/ca-travel-tip/index.html?lat=${lat}&lng=${lng}`;
     navigator.clipboard.writeText(address)
         .then(function () {
             alert(`link copied to clipboard`)
