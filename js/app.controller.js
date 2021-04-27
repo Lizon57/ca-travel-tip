@@ -28,6 +28,9 @@ function onInit() {
 
 function renderLocs(locs) {
     const elLocationsTable = document.querySelector('.locations-table')
+
+    if (locs.length === 0) elLocationsTable.innerHTML='EIN PO KLUM!!'
+
     let strsHTML = '';
 
     locs.map(loc => {

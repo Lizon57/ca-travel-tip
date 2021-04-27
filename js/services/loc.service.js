@@ -8,7 +8,7 @@ export const locService = {
 }
 
 
-var gLocId = 12345
+var gLocId = 0
 
 var locs = []
 
@@ -28,6 +28,8 @@ function addLoc(loc) {
         createdAt: Date.now(),
         updatedAt: ''
     })
+
+    controller.renderLocs(locs)
 }
 //itay
 function removeLocById(locId) {
