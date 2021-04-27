@@ -29,7 +29,7 @@ function addLoc(loc) {
         updatedAt: ''
     })
 }
-// oren!
+// oren!!!
 function removeLocById(locId) {
     locs.filter((loc, idx) => {
         if (loc.id === locId) {
